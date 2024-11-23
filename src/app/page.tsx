@@ -1,4 +1,3 @@
-import Link from "next/link";
 import GameSelectButton from "~/Components/Button";
 
 export default function HomePage() {

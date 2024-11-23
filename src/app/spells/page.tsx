@@ -3,7 +3,7 @@
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 import { SpellPane } from "~/Components/pane";
-import { Spell } from "~/Types/types";
+import type { Spell } from "~/Types/types";
 
 export default function Page() {
   const [state, setState] = useState<Spell>();
@@ -13,7 +13,9 @@ export default function Page() {
     axios.get(`https://api.dofusdb.fr/spells?id=250`)
       .then((response) => {
         setState(response.data.data[0]);
-      });
+      }).catch((error) => {
+        console.error(error)
+      })
   }, []);
 
   useEffect(() => {
@@ -22,8 +24,8 @@ export default function Page() {
       const ctx = canvas.getContext("2d");
 
       if (ctx) {
-        const img = new Image();
-        img.src = state.img;
+        const img = new Image()
+        img.src = state.img
         img.onload = () => {
           ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
           ctx.drawImage(img, 0, 0, canvas.width, canvas.height); // Draw image
@@ -44,7 +46,7 @@ export default function Page() {
           />
         </div>
         <div className="text-2xl text-white text-center">
-          
+
         </div>
       </SpellPane> 
     </div>
